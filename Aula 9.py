@@ -79,3 +79,65 @@ tup = tuple([randint(1, 50) for i in range(5)])
 print(f'Tupla criada aleatoriamente: {tup}')
 print(f'Maior número da tupla: {max(tup)}')
 print(f'Menor número da tupla: {min(tup)}')
+
+# [Exercício 4] Escreva um programa que leia 4 valores pelo teclado e guarde-os em uma tupla. No final, mostre:
+# 1) Quantas vezes apareceu o valor 9;
+# 2) Em que posição foi digitado o primeiro valor 3;
+# 3) Quais foram os números pares.
+# Lembrando que, se o usuário digitar uma valor que não esteja na tupla, precisa retornar erro.
+
+'''pares = 0
+print("Entre com 4 números para fazermos uns paranauês.")
+n1 = int(input('Digite o um número: '))
+n2 = int(input('Digite o dois número: '))
+n3 = int(input('Digite o três número: '))
+n4 = int(input('Digite o quatro número: '))
+tup = (n1, n2, n3, n4)
+tres = ''
+pares = 0
+for n in tup:
+    pares +=1 if n % 2 == 0 else False
+    tres = tup.index(3) if n == 3 else None
+print()
+print('Bem, vamos lá:')
+print(f'O número 9 aparece {tup.count(9)} vezes na tupla')
+print(f'O número 3 aparece pela primeira vez na posição {tres}') if tres != '' else print("O número três não aparece na tupla.")
+print(f'A quantidade de números pares é {pares}')
+print()'''
+
+
+# [Exercício 5] Escreva um programa que tenha uma tupla única com os nomes de produtos e seus respectivos preços,
+# na sequência. No final, mostre uma listagem de preços, organizando os dados em forma tabular.
+
+'''tabela = ('Mesa', 300.00, 'Cadeira', 100.00, 'Estante', 250.00, 'Tapete', 5000.00, 'poltrona', 450.00)
+width = 23
+
+titulo_tabela = "TABELA DE PREÇOS"
+din = 'R$'
+print('='*31)
+print(f'|\033[33m{titulo_tabela:^{29}}\033[m|')
+print('='*31)
+
+for num in range(0, len(tabela), 2):
+    print(f'| {tabela[num]:.<{width-len(str(tabela[num+1]))}}{din:>} {(tabela[num+1]):.2f} |')
+print('='*31)'''
+
+# [Exercício 6] Escreva um programa que tenha uma tupla com várias palavras (não usar acentos).
+# Depois disso, você deve mostrar, para cada palavra, quais são as suas vogais.
+
+'''palavras = ('Mesa', 'Cadeira', 'Estante', 'Tapete', 'poltrona', 'baleia', 'dagerrotipo', 'terraplanismo', 'anedotario')
+vogais = ('a', 'e', 'i', 'o', 'u')
+for i, palavra in enumerate(palavras):
+    print(f'A palavra {palavra.upper()} tem as vogais', end=' ')
+    for letra in palavra:
+        if letra == vogais[0]:
+            print(f'\033[31m{letra}\033[m', end=' ')
+        elif letra == vogais[1]:
+            print(f'\033[32m{letra}\033[m', end=' ')
+        elif letra == vogais[2]:
+            print(f'\033[33m{letra}\033[m', end=' ')
+        elif letra == vogais[3]:
+            print(f'\033[34m{letra}\033[m', end=' ')
+        elif letra == vogais[4]:
+            print(f'\033[35m{letra}\033[m', end=' ')
+    print('')'''
