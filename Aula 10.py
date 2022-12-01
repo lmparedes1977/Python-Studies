@@ -53,20 +53,49 @@ print(f'\n\033[36mLista = {lista}\033[m')'''
 # e cadastre-os em uma lista, já na posição correta de inserção (SEM USAR O sort()).
 # No final, mostre a lista ordenada na tela.
 
-print('ENTRE COM 5 NÚMEROS INTEIROS:')
+par = True
+print('ENTRE COM 15 NÚMEROS INTEIROS:')
 lista5 = []
 lista5.append(int(input('1º: ')))
-for i in range(1, 5):
-    num = int(input(f'{i+1}º: '))
-    if num < lista5[i]:
-        lista5.insert(i, num)
-    elif num < lista5[i+1]:
-        lista5.insert(i+1, num)
-    elif num < lista5[i+2]:
-        lista5.insert(i+2, num)
+if lista5[0] % 2 == 0:
+    par = True
+    print(f'\033[36mAdicionado ao inicio da Lista\033[m')
+else:
+    par = False
+    print(f'\033[33mAdicionado ao inicio da Lista\033[m')
+for i in range(14):
+    num = int(input(f'{i+2}º: '))
+    while num in lista5:
+        num = int(input(f'\033[31mElemento já na lista. Tente outro valor:\033[m '))
+    if num % 2 == 0:
+        par = True
     else:
-        lista5.insert(i+3, num)
-
-
+        par = False
+    if num >= lista5[len(lista5)-1]:
+        if par:
+            lista5.append(num)
+            print(f'\033[36mAdicionado ao fim da Lista\033[m')
+        else:
+            lista5.append(num)
+            print(f'\033[33mAdicionado ao fim da Lista\033[m')
+    else:
+        for elemento in lista5:
+            if num < lista5[0] and par:
+                lista5.insert(0, num)
+                print(f'\033[36mAdicionado ao inicio da Lista\033[m')
+                break
+            elif num < lista5[0] and not par:
+                lista5.insert(0, num)
+                print(f'\033[33mAdicionado ao inicio da Lista\033[m')
+                break
+            elif num < elemento and par:
+                lista5.insert(lista5.index(elemento), num)
+                print(f'\033[36mAdicionado na posição {lista5.index(num)} da Lista\033[m')
+                break
+            elif num < elemento and not par:
+                lista5.insert(lista5.index(elemento), num)
+                print(f'\033[33mAdicionado na posição {lista5.index(num)} da Lista\033[m')
+                break
 
 print(lista5)
+print(len(lista5))
