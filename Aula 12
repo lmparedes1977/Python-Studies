@@ -1,0 +1,268 @@
+mport datetime
+import random
+
+
+def entra_int():
+    val = 0
+    while True:
+        try:
+            val = int(input('ENTRE COM UM VALOR: '))
+            break
+        except:
+            print('\033[31mINVALIDO. Digite apenas um número:\033[m ')
+    return val
+
+def entra_float():
+    val = 0
+    while True:
+        try:
+            val = float(input('ENTRE COM UM VALOR: '))
+            break
+        except:
+            print('\033[31mINVALIDO. Digite apenas um número:\033[m ')
+    return val
+
+def entra_string():
+    val = input('ENTRE COM O TEXTO SOLICITADO: ')
+    while not val.isalpha():
+        val = input('\033[31mCARACTER(ES) INVALIDO(S). Digite o texto solicitado:\033[m ')
+    return val
+
+def testa_continuar():
+    continuar = input('DESEJA CONTINUAR? [S/N] ').upper().strip()[0]
+    while continuar not in 'SN':
+        continuar = input('\033[31mINVALIDO. Deseja continuar? [S/N]\033[m ').upper().strip()[0]
+    if continuar == 'S':
+        return True
+    else:
+        return False
+
+def testa_par(val):
+    if val % 2 == 0:
+        return True
+    else:
+        return False
+
+def cor(cor):
+    if cor == 'vermelho':
+        return 31
+    if cor == 'verde':
+        return 32
+    if cor == 'lilas':
+        return 35
+    if cor == 'azul':
+        return 34
+    if cor == 'amarelo':
+        return 33
+
+def letreiro(texto, coloracao, largura = 30):
+    print('=' * largura)
+    print(f'\033[{cor(coloracao)}m{texto:^{largura}}\033[m')
+    print('=' * largura)
+
+
+# [Exercício 1] Escreva um programa que leia nome e média de um aluno, guardando também a situação em um dicionário.
+# No final, mostre o conteúdo da estrutura na tela.
+
+'''escola = []
+letreiro('CADASTRO DE ALUNOS', 'lilas', 30)
+while True:
+    aluno = {}
+    print('ENTRE COM O NOME')
+    aluno['nome'] = entra_string()
+    print('ENTRE COM A MÉDIA: ')
+    aluno['media'] = float(input('Digite o valor: '))
+    if aluno['media'] >= 7.0:
+        aluno['status'] = 'APROVADO'
+    elif aluno['media'] < 6.0:
+        aluno['status'] = 'REPROVADO'
+    else:
+        aluno['satus'] = 'EM RECUPERACAO'
+    escola.append(aluno)
+    if not testa_continuar():
+        break
+
+letreiro('LISTA E STATUS DOS ALUNOS', 'azul', 30)
+for aluno in escola:
+    print(f'Nome: {aluno["nome"]}')
+    print(f'Media: {aluno["media"]}')
+    if aluno['media'] >= 7.0:
+       color = 'verde'
+    elif aluno['media'] < 6.0:
+        color = 'vermelho'
+    else:
+        color = 'amarelo'
+    print('='*30)
+    print(f'STATUS DO ALUNO: \033[{cor(color)}m{aluno["status"]}\033[m')
+    print('='*30)'''
+
+# [Exercício 2] [DESAFIO] Escreva um programa onde 4 jogadores joguem um dado e tenham resultados aleatórios.
+# Guarde esses resultados em um dicionário. No final, coloque esse dicionário em ordem,
+# sabendo que o vencedor tirou o maior número no dado.
+
+'''jogo_dados = {'Player 1': random.randint(1, 6), 'Player 2': random.randint(1, 6), 'Player 3': random.randint(1, 6), 'Player 4': random.randint(1, 6)}
+
+letreiro('JOGADAS', 'amarelo', 16)
+for chave, valor in jogo_dados.items():
+    print(f'{chave} tirou {valor}')
+
+letreiro('RANKING', 'azul', 16)
+while len(jogo_dados) > 0:
+    for chave, valor in jogo_dados.items():
+        if valor == max(jogo_dados.values()):
+            print(f'{chave} tirou {valor}')
+            del jogo_dados[chave]
+            break'''
+
+# [Exercício 3] Escreva um programa que leia nome, ano de nascimento e carteira de trabalho e cadastre-os (com idade)
+# em um dicionário se por acaso a CTPS (Carteira de Trabalho e Previdência Social) for diferente de ZERO,
+# o dicionário receverá também o ano de contratação e o salário. Calcule e acrescente, além da idade,
+# com quantos anos a pessoa vai se aposentar. (Considere 35 anos de colaboração para se aposentar)
+
+'''letreiro('CADASTRO - MINISTÉRIO DO TRABALHO', 'azul', 35)
+print('CADASTRE O NOME')
+cadastro = {}
+cadastro['nome'] = input('DIGITE O TEXTO SOLICITADO: ').upper().strip()
+print('CADASTRE O ANO DE NASCIMENTO')
+cadastro['ano_nasc'] = entra_int()
+while len(str(cadastro['ano_nasc'])) != 4:
+    print('\033[31mANO NASCIMENTO INVALIDO. INFORMAR ANO COM 4 DÍGITOS\033[M')
+    cadastro['ano_nasc'] = entra_int()
+cadastro['idade'] = datetime.datetime.now().year - cadastro['ano_nasc']
+print('CADASTRE O NR DA CTPS COM 8 DIGITOS (DIGITE "N" CASO DESEMPREGADO)')
+resp = entra_int()
+if resp != 0:
+    while len(str(resp)) != 8:
+        print('\033[31mINVÁLIDO. CTPS PRECISA DE 8 DIGITOS NÚMERICOS\033[M')
+        resp = entra_int()
+    cadastro['ctps'] = resp
+    print('DIGITE O ANO DO CONTRATO ATUAL')
+    cadastro['ano_contr'] = entra_int()
+    while (cadastro['idade']-(datetime.datetime.now().year-cadastro['ano_contr'])) < 18:
+        print('\033[31mINVÁLIDO. MENOR DE 18 NO MOMENTO DA CONTRATACAO.\033[M')
+        cadastro['ano_contr'] = entra_int()
+    while len(str(cadastro['ano_contr'])) < 4:
+        print('\033[31mANO INVALIDO. INFORMAR ANO COM 4 DÍGITOS\033[M')
+        cadastro['ano_contr'] = entra_int()
+    print('DIGITE O SALARIO DO CONTRATO ATUAL')
+    cadastro['salario'] = entra_float()
+
+cadastro['idade_aposentadoria'] = (cadastro['ano_contr'] + 35) - cadastro['ano_nasc']
+
+
+letreiro('RESULTADO DO CADATRO', 'verde', 25)
+for chave, valor in cadastro.items():
+    if type(valor) == float:
+        valor = f'{valor:.2f}'
+        print(f'{chave.upper()}{valor:.>{25 - len(chave)}}')
+    else:
+        print(f'{chave.upper()}{valor:.>{25-len(chave)}}')'''
+
+# [Exercício 4] Escreva um programa que gerencie o aproveitamento de um jogador de futebol.
+# O programa vai ler o nome do jogador e quantas partidas ele jogou.
+# Depois vai ler a quantidade de gols feitos em cada partida. No final, tudo isso será guardado em dicionário,
+# incluindo o total de gols feitos durante o campeonato.
+
+
+'''letreiro('FOOTBALL MANAGER', 'verde', 45)
+
+elenco = []
+while True:
+    jogador = {}
+    jogador['nome'] = str(input('ENTRE COM O NOME DO JOGADOR: '))
+    print('NR DE JOGOS NO PERÍODO. ', end='')
+    jogador['nr_jogos'] = entra_int()
+    jogador['gols_por_jogo'] = []
+    for i in range(jogador['nr_jogos']):
+        print(f'QTD GOLS NO {i+1}º JOGO. ', end='')
+        jogador['gols_por_jogo'].append(entra_int())
+    jogador['total_gols'] = sum(jogador['gols_por_jogo'])
+    elenco.append(jogador.copy())
+    if not testa_continuar():
+        break
+
+letreiro('RESULTADO DO SCOUT - FOOTBALL MANAGER', 'azul', 45)'''
+
+# [Exercício 5] Escreva um programa que leia nome, sexo e idade de várias pessoas,
+# guardando os dados de cada pessoa em um dicionário e todos os dicionários em uma lista. No final, mostre:
+# 1) Quantas pessoas foram cadastradas;
+# 2) A média de idade do grupo;
+# 3) Uma lista com todas as mulheres;
+# 4) Uma lista coom todas as pessoas com idade acima da média.
+
+'''letreiro('MEGA CADASTRO MODE ON', 'vermelho', 40)
+censo = []
+
+while True:
+    pessoa = {}
+    pessoa['nome'] = str(input('NOME DO INDIVÍDUO: '))
+    pessoa['sexo'] = str(input('SEXO [M/F]: ')).upper().strip()[0]
+    while pessoa['sexo'] not in 'MF':
+        pessoa['sexo'] = str(input('\033[31mINVÁLIDO. ENTRE COM "M" OU "F": ')).upper().strip()[0]
+    print('IDADE. ', end='')
+    pessoa['idade'] = entra_int()
+    censo.append(pessoa.copy())
+    if not testa_continuar():
+        break
+
+media_idades = sum([censo[i]['idade'] for i in range(len(censo))]) / len(censo)
+mulheres = [censo[i]['nome'] for i in range(len(censo)) if censo[i]['sexo'] == 'F']
+idade_acima_media = [[censo[i]['nome'], censo[i]['idade']] for i in range(len(censo)) if censo[i]['idade'] > media_idades]
+media_idades = f'{media_idades:.2f}'
+
+
+letreiro('MEGA DEMONSTRAÇÃO MODE ON', 'amarelo', 40)
+print(f'TAMANHO DA AMOSTRA ---> \033[36m{len(censo)} INDIVÍDUOS\033[m')
+print('='*40)
+texto = 'IDADE MÉDIA DA AMOSTRA'
+print(f'{texto}{media_idades:.>{40-len(texto)}}')
+print('='*40)
+print('LISTA DAS MULHERES DA AMOSTRA')
+for mulher in mulheres:
+    print(f'\033[{cor("lilas")}m{mulher.upper()}\033[m')
+print('=' * 40)
+print('LISTA DE PESSOAS COM IDADE ACIMA DA MÉDIA')
+for velhos in idade_acima_media:
+    print(f'\033[{cor("azul")}m{velhos[0].upper()} ---> {velhos[1]} ANOS\033[m')'''
+
+
+# [Exercício 6] [DESAFIO] Escreva um programa que aprimore o exercício 4 para que funcione com vários jogadores,
+# incluindo um sistema de visualização de detalhes do aproveitamento de cada jogador.
+
+letreiro('FOOTBALL MANAGER', 'verde', 45)
+
+elenco = []
+while True:
+    jogador = {}
+    jogador['nome'] = str(input('ENTRE COM O NOME DO JOGADOR: ')).upper().strip()
+    print('NR DE JOGOS NO PERÍODO. ', end='')
+    jogador['nr_jogos'] = entra_int()
+    jogador['gols_por_jogo'] = []
+    for i in range(jogador['nr_jogos']):
+        print(f'QTD GOLS NO {i+1}º JOGO. ', end='')
+        jogador['gols_por_jogo'].append(entra_int())
+    jogador['total_gols'] = sum(jogador['gols_por_jogo'])
+    elenco.append(jogador.copy())
+    if not testa_continuar():
+        break
+
+
+
+while True:
+    letreiro('RESULTADO DO SCOUT - FOOTBALL MANAGER', 'azul', 45)
+    print('PLANTEL DE JOGADORES:')
+    i = 1
+    for jogadores in elenco:
+        print(f'  [{i}] --> {jogadores["nome"]}')
+        i += 1
+    jogador_escolhido = entra_int() - 1
+    letreiro(elenco[jogador_escolhido]['nome'], 'verde')
+    for j in range(len(elenco[jogador_escolhido])):
+        print(f'NR DE JOGOS: {elenco[j]["nr_jogos"]}')
+        print(f'TOTAL DE GOLS: {elenco[j]["total_gols"]}')
+        for j in range(elenco[j]['gols_por_jogo']):
+            print(f'{j+1}º JOGO: {elenco[j]["gols_por_jogo"][j]}')
+    if not testa_continuar():
+        break
+
+letreiro('<<<  FOOTBALL MANAGER  +++  VOLTE SEMPRE  >>>', 'azul', 45)
