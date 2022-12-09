@@ -1,0 +1,60 @@
+def entra_int():
+    val = 0
+    while True:
+        try:
+            val = int(input('ENTRE COM UM VALOR: '))
+            break
+        except:
+            print('\033[31mINVALIDO. Digite apenas um número:\033[m ')
+    return val
+
+def entra_float():
+    val = 0
+    while True:
+        try:
+            val = float(input('ENTRE COM UM VALOR: '))
+            break
+        except:
+            print('\033[31mINVALIDO. Digite apenas um número:\033[m ')
+    return val
+
+def entra_string():
+    val = input('ENTRE COM O TEXTO SOLICITADO: ')
+    while not val.isalpha():
+        val = input('\033[31mCARACTER(ES) INVALIDO(S). Digite o texto solicitado:\033[m ')
+    return val
+
+def testa_continuar():
+    continuar = input('DESEJA CONTINUAR? [S/N] ').upper().strip()[0]
+    while continuar not in 'SN':
+        continuar = input('\033[31mINVALIDO. Deseja continuar? [S/N]\033[m ').upper().strip()[0]
+    if continuar == 'S':
+        return True
+    else:
+        return False
+
+def testa_par(val):
+    if val % 2 == 0:
+        return True
+    else:
+        return False
+
+def cor(cor):
+    if cor == 'vermelho':
+        return 31
+    elif cor == 'verde':
+        return 32
+    elif cor == 'lilas':
+        return 35
+    elif cor == 'azul':
+        return 34
+    elif cor == 'amarelo':
+        return 33
+    else:
+        print('CORES DISPONÍVEIS: VERMELHO, VERDE, LILAS, AZUL E AMARELO. REFAÇA A TRANZAÇÃO')
+
+def letreiro(texto, coloracao, largura = 30):
+    print('=' * largura)
+    print(f'\033[{cor(coloracao)}m{texto:^{largura}}\033[m')
+    print('=' * largura)
+
