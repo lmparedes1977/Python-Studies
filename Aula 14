@@ -1,0 +1,116 @@
+from frescuras import *
+import datetime
+import time
+
+# [Exercício 1] Escreva um programa que tenha um função chamada voto()
+# que vai receber como parâmetro o ano de nascimento de uma pessoa,
+# retornando um valor literal indicando se uma pessoa tem voto NEGADO,
+# OPCIONAL ou OBRIGATÓRIO nas eleições.
+
+def testa_votar(nascimento):
+    idade = datetime.date.today().year - nascimento
+    if idade < 16:
+        print(f'{idade} ANOS -> \033[31mVOTO NEGADO\033[m')
+    elif idade < 18 or idade > 70:
+        print(f'{idade} ANOS -> \033[33mVOTO OPCIONAL\033[m')
+    else:
+        print(f'{idade} ANOS -> \033[34mVOTO OBRIGATÓRIO\033[m')
+
+def testa_ano_nasc(ano):
+    while ano < 1900:
+        print('ANO DIGITADO INVÁLIDO [MIN 1900]. ', end='')
+        ano = entra_int()
+    return ano
+
+'''letreiro('TESTE DE IDADE ELEITORAL', 'verde', 50)
+print("PRECISO SABER SUA IDADE. ", end='')
+ano_nasc = testa_ano_nasc(entra_int())
+print('='*30)
+testa_votar(ano_nasc)'''
+
+# [Exercício 2] Escreva um programa que tenha um função chamada fatorial() que receba dois parâmetros:
+# o primeiro que indique o número a calcular e o outro chamado show, que será um valor lógico (opcional)
+# indicando se será mostrado ou não na tela o processo de cálculo fatorial.
+
+def fatorial(num):
+    j = num
+    fator = 1
+    for i in range(num):
+        fator = fator*j
+        j -= 1
+    letreiro(f'FATORIAL DE {num} É {fator}', 'azul')
+
+def mostra_calculo(num):
+    tempo(f'{num}! =')
+    for i in range(num, 0, -1):
+        tempo(i)
+        if i > 1:
+           tempo('X')
+        else:
+            tempo('=')
+    print()
+
+def tempo(texto):
+    time.sleep(1)
+    print (f'\033[34m{texto}\033[m', end=' ')
+
+'''letreiro('CÁLCULO DE FATORIAL', 'lilas')
+num = entra_int()
+demonstra = input('DESEJA QUE EU DEMONSTREO CÁLCULO? [S/N]: ').upper().strip()[0]
+while demonstra not in 'SN':
+    demonstra = input('\033[31mINVÁLIDO. DESEJA QUE EU DEMONSTREO CÁLCULO? [S/N]:\033[m ').upper().strip()[0]
+if demonstra == 'S':
+    mostra_calculo(num)
+    fatorial(num)
+else:
+    fatorial(num)'''
+
+# [Exercício 3] Escreva um programa que tenha um função chamada ficha(), que receba dois parâmetros opcionais:
+# o nome de um jogador e quantos gols ele marcou. O programa deverá ser capaz de mostrar a ficha do jogador,
+# mesmo que algum dado não tenha sido informado corretamente.
+
+def cadastra_player(nome, gols):
+    return {'nome': nome if nome else 'Nihil', 'nr_gols': nr_gols if nr_gols else 'Nihil'}
+
+'''plantel = []
+letreiro('UNIVERSO DO OLHEIRO - CADASTRO DE CRAQUES', 'verde', 40)
+while True:
+    nome = input('ENTRE COM O NOME DO JOGADOR: ')
+    nr_gols = input('NR DE GOLS MARCADOS PELO JOGADOR: ')
+    plantel.append(cadastra_player(nome, nr_gols))
+    if not testa_continuar():
+        break
+
+letreiro('MASTER BLASTER LISTA',  'amarelo')
+for i in range(len(plantel)):
+    print(f'{(i+1):^30}')
+    print(f'{"NOMO:  "}{plantel[i]["nome"]}')
+    print(f'{"NUMERO DE GOLS:  "}{plantel[i]["nr_gols"]}')
+    print('='*30)'''
+
+# [Exercício 4] Escreva um programa que tenha um função chamada leiaInt(), que vai funcionar de forma semelhante
+# à função input() do Python, só que fazendo a validação para aceitar apenas um valor númerico.
+
+def leia_int():
+    val = 0
+    while True:
+        try:
+            val = int(input('ENTRE COM UM VALOR: '))
+            break
+        except:
+            print('\033[31mINVALIDO. Digite apenas número(s):\033[m ')
+    print('='*20)
+    print('INTEIRO VÁLIDO!')
+    return val
+
+def leia_int2(val):
+    val = str(val)
+    while not val.isnumeric() or val == '':
+        val = str(input('\033[31mINVALIDO. Digite apenas número(s):\033[m '))
+    print('='*20)       
+    print('INTEIRO VÁLIDO!')
+    return val
+
+letreiro('TESTE DE ENTRADA DE INTEIRO', 'amarelo', 40)
+inteiro = leia_int()
+inteiro2 = leia_int2(input('ENTRE COM O VALOR: '))
