@@ -1,0 +1,114 @@
+import random
+import time
+
+from frescuras import *
+
+# [Exercício 1] Escreva um programa que tenha uma função área(), que receba as dimensões de
+# um terreno retangular (largura e comprimento) e mostre a área do ‘terreno.
+
+def area_terreno(frente, lado):
+    print('='*50)
+    print(f'\033[{cor("lilas")}mA ÁREA DO TERRENO DE {frente:.2f}m X {lado:.2f}m É {frente*lado:.2f}m²\033[m')
+
+'''letreiro('CALCULADORA DE ÁREA', 'azul',50)
+print('MEDIDA FRONTAL (METROS), ', end='')
+lado1 = entra_float()
+print('MEDIDA LATERAL (METROS), ', end='')
+lado2 = entra_float()
+area_terreno(lado1, lado2)'''
+
+# [Exercício 2] Escreva um programa que tenha uma função chamada escreva(),
+# que receba um texto qualquer como parâmetro e mostre uma mensagem com tamanho adaptável aos tamanho do texto.
+# Faça isso quantas vezes o usuário quiser.
+
+def mensagem(txt, coloracao):
+    largura = len(txt)
+    print('=' * largura)
+    print(f'\033[{cor(coloracao)}m{txt:^{largura}}\033[m')
+    print('=' * largura)
+
+'''print('CONSTRUA SEU LETREIRO')
+while True:
+    texto = input('DIGITE O TEXTO: ').upper().strip()
+    color = input('DIGITE A COR DESEJADA: ').lower().strip()
+    mensagem(texto, color)
+    if not testa_continuar():
+        break'''
+
+# [Exercício 3] Escreva um programa que tenha uma função chamada contador(), que receba três parâmetros:
+# início, fim e passo e realize a contagem. Seu programa tem que realizar três contagens através da função:
+#1)	De 1 até 10, de 1 em 1;
+#2)	De 10 até 0, de 2 em 2;
+#3)	Uma contagem personalizada.
+
+def conta_passo(inicio, fim, passo):
+    for i in range(inicio, fim > inicio and fim + 1 or fim - 1, fim > inicio and passo or passo*-1):
+        print(f'\033[35m{i}\033[m ', end='')
+    print('')
+
+'''print('VAMOS FAZER 3 CONTAGENS. 2 EU ESCOLHO, UMA TU')
+ini = int(input('POR ONDE QUERES COMEÇAR A CONTAGEM: '))
+fini = int(input("ATÉ QUE NÚMERO (INCLUSO): "))
+pas = int(input('PULANDDO DE QUANTO EM QUANTO (MÓDULO): '))
+print('='*30)
+conta_passo(1, 10, 1)
+conta_passo(10, 0, 2)
+conta_passo(ini, fini, pas)
+print('='*30)'''
+
+# [Exercício 4] Escreva um programa que tenha uma função chamada maior(),
+# que receba vários parâmetros com valores inteiros aleatoriamente.
+# Seu programa tem  que analisar todos os valores e dizer qual deles é o maior.
+
+def maior(lista):
+    maior = 0
+    for numero in lista:
+        if numero > maior:
+            maior = numero
+    print(f'OS NÚMEROS RECEBIDOS FORAM {lista}\nO TOTAL DE ENTRADAS FOI {len(lista)}\nO MAIOR NÚMERO DA COLEÇÃO É {maior}.')
+
+'''numeros = []
+print('ENTRE COM VALORES PARA TESTE DE FUNÇÃO')
+while True:
+    numeros.append(entra_int())
+    if not testa_continuar():
+        break
+
+letreiro('RESULTADO', 'vermelho')
+maior(numeros)'''
+
+# [Exercício 5] Escreva um programa que tenha uma lista chamada números e duas funções chamadas sorteia()
+# e somaPar(). A primeira função vai sortear 5 números e vai colocá-los dentro da lista e a segunda função
+# vai mostrar a soma entre todos os valores PARES sorteados pela função anterior.
+# Mostre os valores pares e ímpares de cores diferentes
+
+def soma_par(lista):
+    soma = 0
+    for numero in lista:
+        if numero % 2 == 0:
+            soma += numero
+    print(f'SOMA DOS PARES = {soma}')
+
+def tempo(texto):
+    time.sleep(1)
+    print (f'\033[31m{texto}\033[m' if texto % 2 != 0 else f'\033[34m{texto}\033[m', end=' ')
+
+
+def sorteia(lista):
+    lista = [random.randint(1,100),
+             random.randint(1,100),
+             random.randint(1,100),
+             random.randint(1,100),
+             random.randint(1,100)]
+    for n in lista:
+        tempo(n)
+    print()
+    print(f'LISTA SORTEADA = {lista}')
+    soma_par(lista)
+
+letreiro('VOU SORTEAR 5 NÚMEROS NUMA LISTA E SOMAR OS NÚMEROS PARES','verde', 60)
+start = input('APERTE "ENTER" E VEJA: ')
+print()
+
+lista_louca = []
+sorteia(lista_louca)
