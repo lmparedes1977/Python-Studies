@@ -114,3 +114,79 @@ def leia_int2(val):
 letreiro('TESTE DE ENTRADA DE INTEIRO', 'amarelo', 40)
 inteiro = leia_int()
 inteiro2 = leia_int2(input('ENTRE COM O VALOR: '))
+
+# [Exercício 5] Escreva um programa que tenha um função chamada notas() que pode receber
+# várias notas de alunos e vai retornar um dicionário com as seguintes informações:
+# 1)	Quantidade de notas;
+# 2)	A maior nota;
+# 3)	A menor nota;
+# 4)	A média da turma;
+# 5)	A situação (opcional).
+# Adicione também as docstrings da função.
+
+
+def media_turma(lista):
+    soma = 0
+    for item in lista:
+        soma += item['media']
+
+    print(f'{(soma/len(lista)):^30}')
+
+def notas(dicio):
+    '''Docstrings função notas:
+    A função recebe o nome de um dicionário já criado pelo usuário,
+    com chaves já definidas pelo usuário fora da função e solicita
+    as notas (float), fazendo cálculo de maior e menor nota, média
+    e atribuindo status'''
+    print('ENTRADAD DE AS NOTAS')
+    dicio['notas'] = []
+    while True:
+        dicio['notas'].append(entra_float())
+        if not testa_continuar():
+            break
+    dicio['maior_nota'] = max(dicio['notas'])
+    dicio['menor_nota'] = min(dicio['notas'])
+    dicio['media'] = sum(dicio['notas'])/len(dicio['notas'])
+    dicio['status'] = 'TEMERÁRIO' if dicio['media'] < 5 else 'SOB-CONTROLE'
+    print('\033[34mFIM DO CADASTRO DE NOTAS\033[m')
+
+
+'''turma = []
+while True:
+    aluno = {'nome': '', 'notas': '', 'maior_nota': '', 'menor_nota': '' , 'media': '', 'status': ''}
+    print('NOME DO ALUNO. ', end='')
+    aluno['nome'] = entra_string().upper()
+    notas(aluno)
+    turma.append(aluno)
+    print('\033[32mCADASTRADO CONCLUÍDO. CONTINUAR PARA CADASTRAR NOVO ALUNO.\033[m')
+    if not testa_continuar():
+        break
+
+
+
+letreiro('APRESENTAÇÃO DA TURMA', 'lilas')
+for aluno in turma:
+    for chave, valor in aluno.items():
+        print(f'{chave}: {valor}')
+    print('='*30)    
+letreiro('NOTA MÉDIA DA TURMA', 'amarelo')
+media_turma(turma)
+
+help(notas)'''
+
+
+# [Exercício 6] Faça um minisistema que utilize o interactive Help do Python.
+# O usuário vai digitar o comando e o manual vai aparecer. Quando o usuário digitar a palavra ‘FIM’,
+# o programa se encerrará. OBS: use CORES.
+
+
+texto1 = 'TESTE1'
+texto2 = 'TESTE2'
+texto3 = 'TESTE3'
+texto4 = 'TESTE4'
+
+
+print(f'\033[1;40;33m{texto1}\033[m')
+print(f'\033[1;30;42m{texto2}\033[m')
+print(f'\033[1;30;41m{texto3}\033[m')
+print(f'\033[1;30;44m{texto4}\033[m')
