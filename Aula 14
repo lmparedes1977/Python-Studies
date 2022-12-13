@@ -180,13 +180,42 @@ help(notas)'''
 # o programa se encerrará. OBS: use CORES.
 
 
-texto1 = 'TESTE1'
-texto2 = 'TESTE2'
-texto3 = 'TESTE3'
-texto4 = 'TESTE4'
+texto1 = 'texto'
+texto2 = 'texto'
+texto3 = 'texto'
+texto4 = 'texto'
 
 
-print(f'\033[1;40;33m{texto1}\033[m')
-print(f'\033[1;30;42m{texto2}\033[m')
-print(f'\033[1;30;41m{texto3}\033[m')
-print(f'\033[1;30;44m{texto4}\033[m')
+print(f'\033[1;40;33m{texto1}\033[m') # fundo preto letra amarela
+print(f'\033[1;30;42m{texto2}\033[m') # fundo verde letra preta
+print(f'\033[1;30;41m{texto3}\033[m') # funto vermelho letra preta
+print(f'\033[1;30;44m{texto4}\033[m') # fundo azul letra preta
+
+# print(f'\033[1;30;44m{print.__doc__:<50}\033[m')
+
+def help_biblio(metodo):
+
+    print(f'\033[1;30;44m=\033[m'*60)
+    print(f'\033[1;30;44m                        BUSCANDO DADOS                      \033[m')
+    print(f'\033[1;30;44m=\033[m'*60)
+    time.sleep(1)
+
+    help(metodo)
+
+
+while True:
+    print(f'\033[1;30;42m=\033[m' * 60)
+    print(f'\033[1;30;42m                  SISTEMA DE AJUDA DO PyHELP                \033[m')
+    print(f'\033[1;30;42m=\033[m' * 60)
+    print('QUAL FUNÇÃO/MÉTODO OU BIBLIOTEQUE QUERES CONHECER MELHOR?')
+    metodo = input('DIGITE O NOME DA FUNÇÃO/BIBLIO, OU "FIM": ').lower()
+    if metodo == 'fim':
+        break
+    help_biblio(metodo)
+    if not testa_continuar():
+        break
+
+print(f'\033[1;30;41m=\033[m' * 60)
+print(f'\033[1;30;41m                 FIM DO PROGRAMA, OBRIGADO!                 \033[m')
+print(f'\033[1;30;41m=\033[m' * 60)
+
